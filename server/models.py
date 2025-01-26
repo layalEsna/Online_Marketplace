@@ -19,7 +19,7 @@ class User(db.Model, SerializerMixin):
     _hash_password = db.Column(db.String(128), nullable=False)
 
     products = db.relationship('Product', secondary='purchases', back_populates='users')
-    purchases = db.relationship('Purchase', back_populates='user')
+    purchases = db.relationship('Purchase', back_populates='user', cascade='all, delete-orphan')
     @property
     def password(self):
         raise AttributeError('Password is not readable.')
@@ -61,7 +61,7 @@ class Product(db.Model, SerializerMixin):
     price = db.Column(db.Float, nullable=False)
 
     users = db.relationship('User', secondary='purchases', back_populates='products')
-    purchases = db.relationship('Purchase', back_populates='product')
+    purchases = db.relationship('Purchase', back_populates='product', cascade='all, delete-orphan')
 
     @validates('name')
     def validate_name(self, key, name):
