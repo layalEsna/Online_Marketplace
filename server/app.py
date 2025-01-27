@@ -36,3 +36,8 @@ api.add_resource(Seller_by_username, '/sellers/<string:username>')
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
+# export FLASK_RUN_PORT=5555
+# flask run
+
+
+# sqlite3 /Users/layla/Development/code/se-prep/phase-4/Online_Marketplace/server/instance/app.db

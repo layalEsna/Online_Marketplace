@@ -18,8 +18,9 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String(50), unique=True, nullable=False)
     _hash_password = db.Column(db.String(128), nullable=False)
 
-    products = db.relationship('Product', secondary='purchases', back_populates='users')
-    purchases = db.relationship('Purchase', back_populates='user', cascade='all, delete-orphan')
+    products = db.relationship('Product', secondary='purchases', back_populates='users', overlaps='purchases', viewonly=True)
+    purchases = db.relationship('Purchase', back_populates='user', overlaps='products')
+    
     @property
     def password(self):
         raise AttributeError('Password is not readable.')
@@ -60,8 +61,8 @@ class Product(db.Model, SerializerMixin):
     image = db.Column(db.String)
     price = db.Column(db.Float, nullable=False)
 
-    users = db.relationship('User', secondary='purchases', back_populates='products')
-    purchases = db.relationship('Purchase', back_populates='product', cascade='all, delete-orphan')
+    users = db.relationship('User', secondary='purchases', back_populates='products', overlaps='purchases', viewonly=True)
+    purchases = db.relationship('Purchase', back_populates='product', overlaps='users')
 
     @validates('name')
     def validate_name(self, key, name):
@@ -106,8 +107,8 @@ class Purchase(db.Model, SerializerMixin):
     delivery_address = db.Column(db.String(255), nullable=False)
     payment_method = db.Column(db.String, nullable=False)
 
-    user = db.relationship('User', back_populates='purchases')
-    product = db.relationship('Product', back_populates='purchases')
+    user = db.relationship('User', back_populates='purchases', overlaps='products', viewonly=True)
+    product = db.relationship('Product', back_populates='purchases', overlaps='users', viewonly=True)
 
     @validates('total_price')
     def validate_total_price(self, key, total_price):
