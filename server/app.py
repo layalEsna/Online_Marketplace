@@ -5,7 +5,7 @@
 # Remote library imports
 from flask import Flask, request, jsonify, make_response
 from flask_restful import Resource, Api
-from models import User
+from models import User, Product
 # Local imports, 
 from config import app, db, api
 # Add your model imports
@@ -49,9 +49,42 @@ class Seller_by_username(Resource):
         if not seller:
             return make_response(jsonify({'error': f'Seller with ID: {username} not found.'}), 404)
         return make_response(jsonify(seller.to_dict()), 200)
+    
+class UpdateDelete(Resource):
+    
+    def patch(self, username, product_id):
+                
+        data = request.get_json()
+        
+        password = data.get('password')
+
+        seller = User.query.filter(User.username == username).first()
+        if not seller:
+            return make_response(jsonify({'error': f'No seller with username: {username} found.'}), 404)
+        
+
+        if not password or not seller.check_password(password):
+            return make_response(jsonify({'error': 'Username and password not match'}), 401)
+        
+        product = Product.query.filter(Product.id==product_id, Product.user_id==seller.id).first()
+        if not product:
+            return make_response(jsonify({'error': f'Product with ID: {product_id} not found for this seller.'}), 404)
+        fieldes_to_update = ['name', 'description', 'image', 'price']
+
+       
+        for attr in fieldes_to_update:
+            if attr in data:
+                setattr(product, attr, data[attr])
+        db.session.commit()
+        return make_response(jsonify(product.to_dict()), 200)
+
+        
+        
+
  
 api.add_resource(Seller, '/sellers')
 api.add_resource(Seller_by_username, '/sellers/<string:username>')
+api.add_resource(UpdateDelete, '/sellers/<string:username>/<int:product_id>')
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
