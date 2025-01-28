@@ -61,6 +61,7 @@ class Product(db.Model, SerializerMixin):
     image = db.Column(db.String)
     price = db.Column(db.Float, nullable=False)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     users = db.relationship('User', secondary='purchases', back_populates='products', overlaps='purchases', viewonly=True)
     purchases = db.relationship('Purchase', back_populates='product', overlaps='users')
 

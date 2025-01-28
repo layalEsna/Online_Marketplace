@@ -35,13 +35,12 @@ class Seller(Resource):
                   'price': product.price
                   }
                   for product in seller.products
-             ],
+             ]
 
              }
              for seller in sellers
-
-
         ]
+
         return make_response(jsonify({'count': len(sellers_with_products), 'sellers': sellers_with_products}), 200)
     
 class Seller_by_username(Resource):

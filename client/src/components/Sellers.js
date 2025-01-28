@@ -10,7 +10,7 @@ function Sellers() {
                 }
                 return res.json()
             })
-            .then(data => setSellers(data))
+            .then(data => setSellers(data.sellers || []))
             .catch(e => console.error(`Internal error: ${e}`))
     }, [])
 
@@ -20,11 +20,22 @@ function Sellers() {
                 {sellers.map(seller =>
                     <li key={seller.id}>
                         <h3>{seller.username}</h3>
-                        
-                        <button>buy</button>
-
-                    </li>)
-                }
+                        <ul>
+                            {(seller.products || []).map(
+                                product => (
+                                    <li key={product.id}>
+                                        <h4>{product.name}</h4>
+                                        <img src={product.image} alt={product.name} style={{width:'100px'}}/>
+                                        <p>{product.description}</p>
+                                        <p>{product.price}</p>
+                                        <button>buy</button>
+                                    </li>
+                                )
+                            )}
+                            
+                        </ul>
+                    </li>
+                )}
             </ul>
         </div>
     )
