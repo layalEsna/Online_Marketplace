@@ -25,6 +25,8 @@ function Sellers() {
                                 product => (
                                     <li key={product.id}>
                                         <h4>{product.name}</h4>
+                                        <button>Edit</button>
+                                        <button>Delete</button>
                                         <img src={product.image} alt={product.name} style={{width:'100px'}}/>
                                         <p>{product.description}</p>
                                         <p>{product.price}</p>
