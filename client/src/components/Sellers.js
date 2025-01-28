@@ -19,7 +19,9 @@ function Sellers() {
             <ul>
                 {sellers.map(seller =>
                     <li key={seller.id}>
-                        <h3>{ seller.username }</h3>
+                        <h3>{seller.username}</h3>
+                        
+                        <button>buy</button>
 
                     </li>)
                 }

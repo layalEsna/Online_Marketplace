@@ -3,7 +3,14 @@ import { Switch, Route } from "react-router-dom";
 import Sellers from "./Sellers";
 
 function App() {
-  return <h1>Project Client</h1>;
+
+  return (
+    <div>
+      <h1>Wellcome to Online Market</h1>
+      
+      <Sellers />
+    </div>
+  )
 }
 
 export default App;
