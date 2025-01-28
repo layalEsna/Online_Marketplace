@@ -19,10 +19,30 @@ def index():
 
 class Seller(Resource):
     def get(self):
-        sellers = [seller.to_dict() for seller in User.query.all()]
+
+        sellers = User.query.all()
         if not sellers:
-            return make_response(jsonify([]), 200)
-        return make_response(jsonify(sellers), 200)
+            return make_response(jsonify({'count': 0, 'sellers': [] }), 200)
+
+        sellers_with_products = [
+            {'id': seller.id,
+             'username': seller.username,
+             'products': [
+                 {'id': product.id,
+                  'name': product.name,
+                  'description': product.description,
+                  'image': product.image,
+                  'price': product.price
+                  }
+                  for product in seller.products
+             ],
+
+             }
+             for seller in sellers
+
+
+        ]
+        return make_response(jsonify({'count': len(sellers_with_products), 'sellers': sellers_with_products}), 200)
     
 class Seller_by_username(Resource):
     def get(self, username):
