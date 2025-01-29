@@ -28,7 +28,7 @@ function Sellers() {
                                     <li key={product.id}>
                                         <h4>{product.name}</h4>
                                         <button onClick={()=> navigate(`/sellers/${seller.username}/authentication`)}>Authenticate</button>
-                                        {/* <button onClick={()=> navigate(`/sellers/${seller.username}/authenticate`)}>Authenticate</button> */}
+                                      
                                         <button>Delete</button>
                                         {/* <button onClick={()=>navigate(`/sellers/${seller.username}/${product.id}`)}>Edit</button> */}
                                         

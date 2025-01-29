@@ -10,7 +10,7 @@ function App() {
     <Router>
       <main>
 
-        <h1>Wellcome to Online Market</h1>
+        <h1>Wellcome to Online Marktet</h1>
         <Routes>
           <Route path="/sellers" element={<Sellers />} />
           {/* <Route path="/sellers/:username/:productId" element={<EditForm/>} /> */}
