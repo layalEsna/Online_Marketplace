@@ -27,7 +27,7 @@ function Sellers() {
                                 product => (
                                     <li key={product.id}>
                                         <h4>{product.name}</h4>
-                                        <button navigate>Edit</button>
+                                        <button onClick={()=>navigate(`/sellers/${seller.username}/${product.id}`)}>Edit</button>
                                         <button>Delete</button>
                                         <img src={product.image} alt={product.name} style={{width:'100px'}}/>
                                         <p>{product.description}</p>
