@@ -15,7 +15,7 @@ function App() {
           <Route path="/sellers" element={<Sellers />} />
           {/* <Route path="/sellers/:username/:productId" element={<EditForm/>} /> */}
           {/* <Route path="/sellers/:username" element={<EditForm />} /> */}
-          {/* <Route path="/sellers/:username/authentication" element={<AuthenticationPage/> } /> */}
+          <Route path="/sellers/:username/authentication" element={<AuthenticationPage/> } />
         </Routes>
       </main>
     </Router>
