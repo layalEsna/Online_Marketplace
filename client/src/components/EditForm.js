@@ -1,14 +1,24 @@
 
 
+// import React from "react";
+// import { useFormik } from 'formik'
+// import { useNavigate, useParams } from "react-router-dom";
+// import * as Yup from 'yup'
+
+// function EditForm() {
+
+//     const { username, productId } = useParams()
+//     const navigate = useNavigate()
 import React, { useEffect, useState } from "react";
 import { useFormik } from 'formik'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import * as Yup from 'yup'
 
 function EditForm() {
 
     const { username, productId } = useParams()
     const [product, setProduct] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`http://127.0.0.1:5555/sellers/${username}/${productId}`)
@@ -46,7 +56,8 @@ function EditForm() {
             .min(1, 'Price must be greater than $1.')
         }),
         onSubmit: (values) => {
-            fetch(`http://127.0.0.1:5555/sellers/${username}/${productId}`, {
+            // fetch(`http://127.0.0.1:5555/sellers/${username}/${productId}`, {
+            fetch(`http://127.0.0.1:5555/sellers/${username}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
