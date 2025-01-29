@@ -42,25 +42,25 @@ function AuthenticationPage() {
     })
 
     return (
-        // <div>
-        //     <form onSubmit={formik.handleSubmit}>
-        //         <label htmlFor="password">Enter your password</label>
-        //         <input
-        //             id="password"
-        //             type="password"
-        //             name="password"
-        //             value={formik.values.password}
-        //             onChange={formik.handleChange}
-        //             onBlur={formik.handleBlur}
-        //         />
-        //         {formik.errors.password && formik.touched.password && (
-        //             <div>{ formik.errors.password }</div>
-        //         )}
-        //         <button type="submit">Authenticate</button>
+        <div>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="password">Enter your password</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                {formik.errors.password && formik.touched.password && (
+                    <div>{ formik.errors.password }</div>
+                )}
+                <button type="submit">Authenticate</button>
 
-        //     </form>
+            </form>
 
-        // </div>
+        </div>
     )
 
 
