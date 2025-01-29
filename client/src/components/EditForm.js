@@ -68,7 +68,67 @@ function EditForm() {
     }
     return (
         <div>
-            
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="name">Product Name</label>
+                <input
+
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}   
+                    
+                />
+                {formik.errors.name && formik.touched.name && (
+                        <div>{ formik.errors.name }</div>
+                )}
+                <label htmlFor="image">Image URL</label>
+                <input
+
+                    id="image"
+                    name="image"
+                    type="text"
+                    value={formik.values.image}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}   
+                    
+                />
+                {formik.errors.image && formik.touched.image && (
+                        <div>{ formik.errors.image }</div>
+                )}
+                <label htmlFor="description">DescriptionL</label>
+                <input
+
+                    id="description"
+                    name="description"
+                    type="text"
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}   
+                    
+                />
+                {formik.errors.description && formik.touched.description && (
+                        <div>{ formik.errors.description }</div>
+                )}
+                <label htmlFor="price">Price</label>
+                <input
+
+                    id="price"
+                    name="price"
+                    type="number"
+                    value={formik.values.price}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}   
+                    
+                />
+                {formik.errors.price && formik.touched.price && (
+                        <div>{ formik.errors.price }</div>
+                )}
+
+                <button type="submit">submit</button>
+            </form>
+
         </div>
     )
 
