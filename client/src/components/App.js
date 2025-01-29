@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter
 import Sellers from "./Sellers";
 
 function App() {
 
   return (
-    <div>
-      <h1>Wellcome to Online Market</h1>
-      
-      <Sellers />
-    </div>
+    <Router>
+      <main>
+
+        <h1>Wellcome to Online Market</h1>
+        <Routes>
+          <Route path="/sellers" element={<Sellers />} />
+        </Routes>
+      </main>
+    </Router>
   )
+
 }
 
 export default App;

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 function Sellers() {
+    const navigate = useNavigate()
     const [sellers, setSellers] = useState([])
 
     useEffect(() => {
@@ -25,7 +27,7 @@ function Sellers() {
                                 product => (
                                     <li key={product.id}>
                                         <h4>{product.name}</h4>
-                                        <button>Edit</button>
+                                        <button navigate>Edit</button>
                                         <button>Delete</button>
                                         <img src={product.image} alt={product.name} style={{width:'100px'}}/>
                                         <p>{product.description}</p>

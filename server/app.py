@@ -43,7 +43,7 @@ class Seller(Resource):
 
         return make_response(jsonify({'count': len(sellers_with_products), 'sellers': sellers_with_products}), 200)
     
-class Seller_by_username(Resource):
+class SellerByUsername(Resource):
     def get(self, username):
         seller = User.query.filter(User.username == username).first()
         if not seller:
@@ -69,9 +69,8 @@ class UpdateDelete(Resource):
         product = Product.query.filter(Product.id==product_id, Product.user_id==seller.id).first()
         if not product:
             return make_response(jsonify({'error': f'Product with ID: {product_id} not found for this seller.'}), 404)
-        fieldes_to_update = ['name', 'description', 'image', 'price']
-
-       
+        
+        fieldes_to_update = ['name', 'description', 'image', 'price']       
         for attr in fieldes_to_update:
             if attr in data:
                 setattr(product, attr, data[attr])
@@ -83,7 +82,7 @@ class UpdateDelete(Resource):
 
  
 api.add_resource(Seller, '/sellers')
-api.add_resource(Seller_by_username, '/sellers/<string:username>')
+api.add_resource(SellerByUsername, '/sellers/<string:username>')
 api.add_resource(UpdateDelete, '/sellers/<string:username>/<int:product_id>')
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
