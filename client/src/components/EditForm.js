@@ -56,8 +56,8 @@ function EditForm() {
             .min(1, 'Price must be greater than $1.')
         }),
         onSubmit: (values) => {
-            fetch(`http://127.0.0.1:5555/sellers/${username}/${productId}`, {
-            // fetch(`http://127.0.0.1:5555/sellers/${username}/`, {
+            // fetch(`http://127.0.0.1:5555/sellers/${username}/${productId}`, {
+            fetch(`http://127.0.0.1:5555/sellers/${username}/authentication`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

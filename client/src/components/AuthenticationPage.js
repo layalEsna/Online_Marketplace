@@ -43,6 +43,7 @@ function AuthenticationPage() {
 
     return (
         <div>
+            <h1>Seller Authentication</h1>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="password">Enter your password</label>
                 <input

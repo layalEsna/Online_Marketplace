@@ -87,7 +87,7 @@ class PasswordAuthentication(Resource):
             return make_response(jsonify({'error': 'User not found.'}), 400)
         if not user.check_password(password):
             return make_response(jsonify({'error': 'Password did not match.'}), 401)
-        return make_response(jsonify({'message': 'Successfull authentication.'}), 200)
+        return make_response(jsonify({'message': 'Successful authentication.'}), 200)
         
 
 
