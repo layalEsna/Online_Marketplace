@@ -77,13 +77,25 @@ class UpdateDelete(Resource):
         db.session.commit()
         return make_response(jsonify(product.to_dict()), 200)
 
-        
+class PasswordAuthentication(Resource):
+    def post(self, username):
+        data = request.get_json()  
+        password = data.get('password')
+
+        user = User.query.filter(User.username == username).first()
+        if not user:
+            return make_response(jsonify({'error': 'User not found.'}), 400)
+        if not user.check_password(password):
+            return make_response(jsonify({'error': 'Password did not match.'}), 401)
+        return make_response(jsonify({'message': 'Successfull authentication.'}), 200)
         
 
- 
+
 api.add_resource(Seller, '/sellers')
 api.add_resource(SellerByUsername, '/sellers/<string:username>')
 api.add_resource(UpdateDelete, '/sellers/<string:username>/<int:product_id>')
+api.add_resource(PasswordAuthentication, '/sellers/<string:username>/authentication')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
