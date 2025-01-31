@@ -114,7 +114,7 @@
 
 
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -122,6 +122,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 function AuthenticationPage() {
     const navigate = useNavigate();
     const { username, product_id } = useParams();
+    const [error, setError] = useState('')
 
     useEffect(() => {
         console.log("Component mounted!");
@@ -155,16 +156,7 @@ function AuthenticationPage() {
                 }
                 return res.json();
             })
-            // .then(data => {
-            //     console.log("Server Response Data:", data);
-            //     if (product_id) {
-            //         // navigate(`/sellers/${username}/${product_id}`);
-            //         navigate(`/sellers/${username}/${product_id}`);
-            //     } else {
-            //         console.log('Product is undefined.');
-            //     }
-                // })
-
+            
 
                 .then(data => {
                     console.log("Server Response Data:", data);
@@ -180,7 +172,8 @@ function AuthenticationPage() {
 
 
 
-            .catch(e => {
+                .catch(e => {
+                setError(e.message)
                 console.error("Fetch Error:", e);
             });
         }
@@ -194,6 +187,7 @@ function AuthenticationPage() {
         <div>
             <h1>Seller Authentication</h1>
             <h4>Username: {username}</h4>
+            {error && <div>{error}</div>}
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="password">Enter your password</label>
                 <input
@@ -207,8 +201,10 @@ function AuthenticationPage() {
                 {formik.errors.password && formik.touched.password && (
                     <div>{formik.errors.password}</div>
                 )}
+               
                 <button type="submit">Authenticate</button>
             </form>
+            {/* {error && <div>{error}</div>} */}
         </div>
     );
 }

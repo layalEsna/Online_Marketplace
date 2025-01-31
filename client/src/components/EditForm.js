@@ -76,7 +76,11 @@ function EditForm() {
                     }
                     return res.json()
                 })
-                .then(updatedProduct => console.log(updatedProduct))
+                .then(updatedProduct => {
+
+                    console.log(updatedProduct)
+                    navigate('/sellers')
+                })
                 .catch(e => console.error(e))
         }
     })
