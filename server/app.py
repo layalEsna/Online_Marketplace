@@ -17,6 +17,10 @@ from config import app, db, api
 def index():
     return '<h1>Project Server</h1>'
 
+@app.route('/test-static')
+def test_static():
+    return app.send_static_file('images/laptop.jpg')
+
 class Seller(Resource):
     def get(self):
 
@@ -51,6 +55,19 @@ class SellerByUsername(Resource):
         return make_response(jsonify(seller.to_dict()), 200)
     
 class UpdateDelete(Resource):
+
+    
+    def get(self, username, product_id):  # <-- Add this method
+        seller = User.query.filter_by(username=username).first()
+        if not seller:
+            return make_response(jsonify({'error': 'User not found'}), 404)
+
+        product = Product.query.filter_by(id=product_id, user_id=seller.id).first()
+        if not product:
+            return make_response(jsonify({'error': 'Product not found'}), 404)
+
+        return make_response(jsonify(product.to_dict()), 200)
+
     
     def patch(self, username, product_id):
                 
@@ -93,6 +110,7 @@ class PasswordAuthentication(Resource):
 
 api.add_resource(Seller, '/sellers')
 api.add_resource(SellerByUsername, '/sellers/<string:username>')
+# api.add_resource(UpdateDelete, '/sellers/<string:username>/<int:product_id>')
 api.add_resource(UpdateDelete, '/sellers/<string:username>/<int:product_id>')
 api.add_resource(PasswordAuthentication, '/sellers/<string:username>/authentication')
 

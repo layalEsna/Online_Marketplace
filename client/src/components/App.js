@@ -13,9 +13,10 @@ function App() {
         <h1>Wellcome to Online Marktet</h1>
         <Routes>
           <Route path="/sellers" element={<Sellers />} />
-          {/* <Route path="/sellers/:username/:productId" element={<EditForm/>} /> */}
-          {/* <Route path="/sellers/:username" element={<EditForm />} /> */}
-          <Route path="/sellers/:username/authentication" element={<AuthenticationPage/> } />
+
+          <Route path="/sellers/:username/:product_id" element={<EditForm />} />
+
+          <Route path="/sellers/:username/authentication/:product_id" element={<AuthenticationPage />} />
         </Routes>
       </main>
     </Router>

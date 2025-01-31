@@ -14,7 +14,8 @@ import os
 # Local imports
 
 # Instantiate app, set attributes
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/app.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/layla/Development/code/se-prep/phase-4/Online_Marketplace/server/instance/app.db'
 # sqlite3 /Users/layla/Development/code/se-prep/phase-4/Online_Marketplace/server/instance/app.db
